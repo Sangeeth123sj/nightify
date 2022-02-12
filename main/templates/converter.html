@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+
+<h1>Nightify</h1>
+<br>
+<h2>Upload your image to night it.</h2>
+<br>
+<form method='post' enctype="multipart/form-data" action={% url 'converter' %}>
+{% csrf_token %}
+    <!--input type="file" id="myFile" name="filename"-->
+{{ form.as_p }}
+<h1> {{upload_status}} </h1>
+<br>
+<button type='submit' class='btn btn-success'>Upload</button>
+</form>
+
+<br>
+<button class='btn btn-outline-success'>Convert</button>
+<br>
+<br>
+{% if upload_status %}
+<img src="../media/{{image}}"  width="200" height="200" />
+<img src="../media/{{converted_picture}}"  width="200" height="200" />
+{% endif %}
+<br>
+<br>
+<a class='btn btn-success' download="night_image"  href="../media/{{converted_picture}}" >Download</a>
+{% endblock %}

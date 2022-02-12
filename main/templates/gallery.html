@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+<link rel='stylesheet' type='text/css' href = {% static 'css/style.css' %}>
+<link rel='stylesheet' type='text/css' href = {% static 'css/responsive.css' %}>
+<link rel='stylesheet' type='text/css' href = {% static 'css/bootstrap.min.css' %}>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+}
+.header {
+  text-align: center;
+  padding: 32px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href={% url 'home' %}><h1>Nightify</h1></a>
+        
+        <!-- Links -->
+        
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_email' %}">Change E-mail</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_logout' %}">Sign Out</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_login' %}">Sign In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link 3</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+<!-- Header -->
+
+  
+<center>
+
+  <h1>Gallery</h1>
+
+  <!--div class="header" id="myHeader">
+    <p>Click on the buttons to change the grid view.</p>
+    <button class="btn" onclick="o()">1</button>
+    <button class="btn active" onclick="two()">2</button>
+  </div-->
+<!-- Photo Grid -->
+
+        {% for picture in pictures %}
+        <!--a href="{% url 'download' %}"-->
+        <a href="../media/{{picture.upload}}"  download="image">
+            <!-- Trigger the modal with a button >
+  <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button-->
+            <img src="../media/{{picture.upload}}" alt="" width="30%" height="20%" id="pic" >
+        </a>  <!--onclick="download('{{picture.upload}}')"-->
+        <a href="../media/{{picture.converted_picture}}" download="image"  >
+          <img src="../media/{{picture.converted_picture}}" alt="" width="20%" height="20%" >
+        </a>
+        {% endfor %}
+ 
+  
+    {% for picture in pictures %}
+          
+        {% endfor %}
+  
+</center>
+
+
+
+<script>
+
+//var myhtml = document.createElement("div");
+//myhtml.innerHTML = "You are going to delete <b>"+ name +"</b> address. ";
+
+
+ /* Swal.fire({
+    title: 'Download',
+    content: myhtml.innerHTML,
+    //content: myhtml,
+    imageUrl: "../media/"+creator,
+    imageWidth: 400,
+    imageHeight: 200,
+    imageAlt: 'Custom image',
+  })*/
+
+
+// Get the elements with class="column"
+var elements = document.getElementsByClassName("column");
+
+// Declare a "loop" variable
+var i;
+
+// Full-width images
+function o() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.flex = "100%";
+  }
+}
+
+// Two images side by side
+function two() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.flex = "50%";
+  }
+}
+
+
+//
+/*///
+$(document).ready(function(){
+
+  $("#pic").click(function(event){
+    $.ajax({
+      url: '/ajax/download/',
+      data: {
+          'picture_upload': '{{picture.upload}}',
+          //'converted_picture': '{{picture.converted_picture}}',
+      },
+      dataType: 'json',
+      success: function (data){
+        print("ajax success")
+        //window.location.href = "{% url 'download' %}";
+      }    
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>
