@@ -6,10 +6,12 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
+    path('creator_signup/', views.creator_signup, name='creator_signup'),
     path('home/', views.home, name='home'),
     path('converter/', views.converter, name='converter'),
     path('gallery/', views.gallery, name='gallery'),
     path('download/', views.download, name='download'),
     path('ajax/download/', views.download_ajax, name='download_ajax'),
-    path('my_pictures/', views.my_pictures, name='my_pictures')
+    path('my_pictures/', views.my_pictures, name='my_pictures'),
+    path('api/', views.api, name='api'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

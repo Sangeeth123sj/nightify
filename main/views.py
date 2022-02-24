@@ -2,14 +2,32 @@ from django.shortcuts import render
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
-from .models import Picture
+from .models import Picture, Creator
 from .forms import UploadForm
 from PIL import Image, ImageOps
 from django.http import JsonResponse
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 # Create your views here.
 
+def creator_signup(request):
+    if request.method =='POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = User.objects.create_user(email,password)
+        user.save()
+        url = request.POST['url']
+        creator = Creator(user = user,portfolio_url = url)
+        creator.save()
+        
+    return render(request,'creator_signup.html')
+
 def home(request):
+    creator = Creator.objects.filter(user = request.user).exists()
+    if creator:
+        print("CREATOR")
     return render(request, 'contact.html')
 
 def converter(request):
@@ -77,3 +95,6 @@ def my_pictures(request):
     context = {}
     context['pictures'] = pictures
     return render(request, 'my_pictures.html', context)
+
+def api(request):
+    return JsonResponse({"ping":"pong"})

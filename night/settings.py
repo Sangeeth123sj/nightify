@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_framework',
     #social providers
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
@@ -150,7 +151,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sangeeth123sj@gmail.com'
-EMAIL_HOST_PASSWORD = 'myqhtdrctpnictvl'
+EMAIL_HOST_PASSWORD = 'gayhwgwsrdwryopf'
 #django-allauth registraion settings
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
 #ACCOUNT_EMAIL_REQUIRED = True

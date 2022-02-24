@@ -10,3 +10,7 @@ class Picture(Model):
     upload = models.ImageField(upload_to = 'uploads/')
     converted_picture = models.ImageField(upload_to = 'uploads/', blank = True)
     user = models.ForeignKey(User, on_delete=models.CASCADE )
+    
+class Creator(Model):
+    portfolio_url = models.URLField()
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
